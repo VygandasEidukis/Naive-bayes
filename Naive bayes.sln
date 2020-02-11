@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Naive-bayes.UI", "Naive bayes\Naive-bayes.UI.csproj", "{DA7C6C75-8E98-422D-A989-FEF754670175}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Naive-bayes", "Naive bayes\Naive-bayes.csproj", "{DA7C6C75-8E98-422D-A989-FEF754670175}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Naive-bayes.Data_Access", "Naive-bayes.Data_Access\Naive-bayes.Data_Access.csproj", "{3CAFA706-087E-4B39-BCC6-52041725C64C}"
 EndProject
