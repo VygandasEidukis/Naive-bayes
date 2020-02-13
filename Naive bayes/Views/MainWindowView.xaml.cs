@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -17,9 +18,15 @@ namespace Naive_bayes.Views
     /// </summary>
     public partial class MainWindowView : Window
     {
+        public static RegisterDataView registerData { get; } = new RegisterDataView();
+
         public MainWindowView()
         {
             InitializeComponent();
+            Task.Run(() =>
+            {
+                this.Dispatcher.Invoke(()=>registerData.Show());
+            });
             DataContext = new ViewModels.MainWindowViewModel();
         }
     }

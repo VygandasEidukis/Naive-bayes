@@ -4,9 +4,8 @@ using System.Text;
 
 namespace Naive_bayes.Data_Access.Models
 {
-    public class PenetrationDataPoint
+    public class PenetrationDataPoint : BaseModel
     {
-        public int Id { get; set; }
         public bool? WillPen { get; set; }
 
         public Armor Armor { get; set; }
