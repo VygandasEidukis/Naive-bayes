@@ -1,4 +1,5 @@
-﻿using Naive_bayes.Common.Repositories;
+﻿using Naive_bayes.Common.Models;
+using Naive_bayes.Common.Repositories;
 using Naive_bayes.Data_Access.Contexts;
 using Naive_bayes.Data_Access.Models;
 using System;
@@ -13,5 +14,16 @@ namespace Naive_bayes.Data_Access.Repositories
         {
 
         }
+
+        public async System.Threading.Tasks.Task<IEnumerable<ArmorDto>> GetAsync()
+        {
+            var arnors = await this.GetAll();
+            List<ArmorDto> armorDtos = new List<ArmorDto>();
+            foreach (var armor in arnors)
+                armorDtos.Add(armor.ToDto());
+
+            return armorDtos;
+        }
+
     }
 }
