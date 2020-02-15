@@ -14,5 +14,7 @@ namespace Naive_bayes.Common.Models
         public PenetrationDto Penetration { get; set; }
         public ShellSizeDto ShellSize { get; set; }
         public ShellTypeDto ShellType { get; set; }
+    
+        
     }
 }

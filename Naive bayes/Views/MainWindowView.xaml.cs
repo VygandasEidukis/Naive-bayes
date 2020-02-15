@@ -26,8 +26,15 @@ namespace Naive_bayes.Views
             Task.Run(() =>
             {
                 this.Dispatcher.Invoke(()=>registerData.Show());
+                registerData.Closed += (a, b) => this.Close();
             });
             DataContext = new ViewModels.MainWindowViewModel();
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            registerData.Close();
+            base.OnClosed(e);
         }
     }
 }

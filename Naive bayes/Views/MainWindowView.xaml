@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindowView" Height="450" Width="800">
     <Grid>
-        
+        <ListView ItemsSource="{Binding Penetrations}">
+            
+        </ListView>
     </Grid>
 </Window>
