@@ -6,9 +6,10 @@
     <RootNamespace>Naive_bayes</RootNamespace>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="MvvmCross" Version="6.4.2" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.112" />
   </ItemGroup>
 
   <ItemGroup>

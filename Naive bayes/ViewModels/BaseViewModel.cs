@@ -3,8 +3,8 @@ using System.Runtime.CompilerServices;
 
 namespace Naive_bayes.ViewModels
 {
-    public class BaseViewModel
-    {
+	public class BaseViewModel
+	{
 		#region Notify property changed
 		public event PropertyChangedEventHandler PropertyChanged;
 

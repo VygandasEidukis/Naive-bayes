@@ -10,6 +10,8 @@ namespace Naive_bayes.Data_Access.Models
         public int Id { get; set; }
         public string Type { get; set; }
 
+        public virtual ICollection<PenetrationDataPoint> PenetrationData { get; set; }
+
         internal ShellTypeDto ToDto()
         {
             var dto = new ShellTypeDto()

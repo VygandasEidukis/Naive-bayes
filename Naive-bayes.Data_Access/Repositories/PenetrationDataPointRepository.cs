@@ -4,7 +4,9 @@ using Naive_bayes.Data_Access.Contexts;
 using Naive_bayes.Data_Access.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Naive_bayes.Data_Access.Repositories
 {
@@ -15,14 +17,37 @@ namespace Naive_bayes.Data_Access.Repositories
 
         }
 
-        public async System.Threading.Tasks.Task<IEnumerable<PenetrationDataPointDto>> GetAsync()
+        public async Task<IEnumerable<PenetrationDataPointDto>> GetAsync()
         {
-            var dataPoints = await this.GetAll();
+            var dataPoints = Context.PenetrationDataPoints
+                .Include(x => x.angle)
+                .Include(a => a.armor)
+                .Include(b => b.penetration)
+                .Include(c => c.shellSize)
+                .Include(d => d.shellType);
             List<PenetrationDataPointDto> dataPointDtos = new List<PenetrationDataPointDto>();
             foreach (var point in dataPoints)
-                dataPointDtos.Add(point.ToDto());
+            {
+                var dPoint = point.ToDto();
+                dataPointDtos.Add(dPoint);
+            }
+                
 
             return dataPointDtos;
+        }
+
+        public async Task CreateNewDataPoint(PenetrationDataPointDto penetrationDataPoint)
+        {
+            var dataPoint = new PenetrationDataPoint()
+            {
+                angleId = penetrationDataPoint.Angle.Id, 
+                armorId = penetrationDataPoint.Armor.Id,
+                penetrationId = penetrationDataPoint.Penetration.Id,
+                shellSizeId = penetrationDataPoint.ShellSize.Id,
+                shellTypeId = penetrationDataPoint.ShellType.Id
+            };
+            await Add(dataPoint).ConfigureAwait(true);
+            await SaveChanges();
         }
     }
 }

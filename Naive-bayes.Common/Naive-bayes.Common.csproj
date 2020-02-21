@@ -5,4 +5,8 @@
     <RootNamespace>Naive_bayes.Common</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Data.SQLite" Version="1.0.112" />
+  </ItemGroup>
+
 </Project>

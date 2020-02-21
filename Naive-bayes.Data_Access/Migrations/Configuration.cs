@@ -6,18 +6,18 @@
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Contexts.PenetrationDataContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Naive_bayes.Data_Access.Contexts.PenetrationDataContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(Contexts.PenetrationDataContext context)
+        protected override void Seed(Naive_bayes.Data_Access.Contexts.PenetrationDataContext context)
         {
             context.Angles.AddOrUpdate
                 (
-                    new Angle() { Id= 1, angle = "Flat" },
+                    new Angle() { Id = 1, angle = "Flat" },
                     new Angle() { Id = 2, angle = "Small" },
                     new Angle() { Id = 3, angle = "Medium" },
                     new Angle() { Id = 4, angle = "Big" },
@@ -56,7 +56,6 @@
                     new ShellType() { Id = 3, Type = "HE" }
                 );
             context.SaveChanges();
-
         }
     }
 }

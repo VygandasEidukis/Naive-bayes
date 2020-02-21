@@ -5,6 +5,7 @@ using Naive_bayes.Data_Access.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Naive_bayes.Data_Access.Repositories
 {
@@ -13,6 +14,12 @@ namespace Naive_bayes.Data_Access.Repositories
         public ArmorRepository(PenetrationDataContext context) : base(context)
         {
 
+        }
+
+        public async Task<ArmorDto> Get(int id)
+        {
+            var pen = await Find(id);
+            return pen.ToDto();
         }
 
         public async System.Threading.Tasks.Task<IEnumerable<ArmorDto>> GetAsync()

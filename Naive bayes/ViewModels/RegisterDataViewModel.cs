@@ -1,11 +1,8 @@
 ﻿using Naive_bayes.Common.Models;
 using Naive_bayes.Data_Access.Contexts;
-using System;
-using System.Collections.Generic;
+using Naive_bayes.Data_Access.Repositories;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Text;
+using System.Windows.Input;
 
 namespace Naive_bayes.ViewModels
 {
@@ -92,12 +89,39 @@ namespace Naive_bayes.ViewModels
 			Load();
 		}
 
-		public void Load()
+		public async void Load()
 		{
 			ResetData();
 			var context = new PenetrationDataContext();
 
-		    
+			var angles = await new AngleRepository(context).GetAsync();
+			foreach (var angle in angles)
+				Angle.Add(angle);
+
+			var armors = await new ArmorRepository(context).GetAsync();
+			foreach (var armor in armors)
+				Armor.Add(armor);
+
+			var penetrations = await new PenetrationRepository(context).GetAsync();
+			foreach (var pen in penetrations)
+				Penetration.Add(pen);
+
+			var shellSizes = await new ShellSizeRepository(context).GetAsync();
+			foreach (var shellSize in shellSizes)
+				ShellSize.Add(shellSize);
+
+			var shellTypes = await new ShellTypeRepository(context).GetAsync();
+			foreach (var type in shellTypes)
+				ShellType.Add(type);
+
+			DataPoint = new PenetrationDataPointDto() 
+			{ 
+				Angle = this.Angle[0], 
+				Armor = this.Armor[0], 
+				ShellType = this.ShellType[0], 
+				ShellSize = this.ShellSize[0], 
+				Penetration = this.Penetration[0] 
+			};
 		}
 
 		public void ResetData()
@@ -110,9 +134,12 @@ namespace Naive_bayes.ViewModels
 			DataPoint = new PenetrationDataPointDto();
 		}
 
-		public void AddData_Clicked()
+		public async void AddData_Clicked()
 		{
-			System.Windows.MessageBox.Show("You Have Clicked the button");
+			var repository = new PenetrationDataPointRepository(new PenetrationDataContext());
+			await repository.CreateNewDataPoint(DataPoint);
+			Load();
+			System.Windows.MessageBox.Show("Added data");
 		}
 
 		

@@ -10,7 +10,9 @@ namespace Naive_bayes.Data_Access.Models
         public int Id { get; set; }
         public string armor { get; set; }
 
-        internal ArmorDto ToDto()
+        public virtual ICollection<PenetrationDataPoint> PenetrationData { get; set; }
+
+        public ArmorDto ToDto()
         {
             var dto = new ArmorDto()
             {

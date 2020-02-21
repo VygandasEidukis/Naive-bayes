@@ -12,10 +12,7 @@
     <PackageReference Include="SQLite.CodeFirst" Version="1.5.3.29" />
     <PackageReference Include="System.Data.SQLite" Version="1.0.112" />
     <PackageReference Include="System.Data.SQLite.EF6" Version="1.0.112" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Configurations\" />
+    <PackageReference Include="System.Data.SQLite.EF6.Migrations" Version="1.0.106" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,11 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Migrations\202002101604066_initial.resx">
-      <DependentUpon>202002101604066_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Migrations\202002131752051_addedallclassess.resx">
-      <DependentUpon>202002131752051_addedallclassess.cs</DependentUpon>
+    <EmbeddedResource Update="Migrations\202002211646207_Initial.resx">
+      <DependentUpon>202002211646207_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
 

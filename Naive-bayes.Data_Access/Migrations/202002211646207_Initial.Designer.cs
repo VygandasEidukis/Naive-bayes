@@ -7,13 +7,13 @@ namespace Naive_bayes.Data_Access.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.3.0")]
-    public sealed partial class addedallclassess : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addedallclassess));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "202002131752051_addedallclassess"; }
+            get { return "202002211646207_Initial"; }
         }
         
         string IMigrationMetadata.Source

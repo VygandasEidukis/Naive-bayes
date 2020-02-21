@@ -1,4 +1,5 @@
-﻿using Naive_bayes.Data_Access.Models;
+﻿using Naive_bayes.Data_Access.Configurations;
+using Naive_bayes.Data_Access.Models;
 using SQLite.CodeFirst;
 using System.Data.Entity;
 
@@ -13,7 +14,7 @@ namespace Naive_bayes.Data_Access.Contexts
         public DbSet<ShellSize> ShellSizes { get; set; }
         public DbSet<ShellType> ShellTypes { get; set; }
 
-        public PenetrationDataContext() : base("_SqliteDB")
+        public PenetrationDataContext() : base("PenDB")
         {
             Database.SetInitializer(new CreateDatabaseIfNotExists<PenetrationDataContext>());
         }
@@ -21,8 +22,7 @@ namespace Naive_bayes.Data_Access.Contexts
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            var sqliteConnectionInitializer = new SqliteCreateDatabaseIfNotExists<PenetrationDataContext>(modelBuilder);
-            Database.SetInitializer(sqliteConnectionInitializer);
+            //modelBuilder.Configurations.Add(new PenetrationDataPointConfiguration());
         }
     }
 }

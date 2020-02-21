@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         WindowStyle="ToolWindow"
         ResizeMode="NoResize"
-        Title="RegisterDataView" Height="350" Width="200">
+        Title="RegisterDataView" Height="360" Width="200">
     <Grid>
         <StackPanel Margin="5,0,5,0">
             <StackPanel.Resources>
@@ -16,16 +16,16 @@
                 </Style>
             </StackPanel.Resources>
             <TextBlock Text="Angle"/>
-            <ComboBox Height="25"/>
+            <ComboBox SelectedItem="{Binding DataPoint.Angle}" ItemsSource="{Binding Angle}" Height="30"/>
             <TextBlock Text="Armor"/>
-            <ComboBox Height="25"/>
+            <ComboBox SelectedItem="{Binding DataPoint.Armor}" ItemsSource="{Binding Armor}" Height="30"/>
             <TextBlock Text="Penetration"/>
-            <ComboBox Height="25"/>
+            <ComboBox SelectedItem="{Binding DataPoint.Penetration}" ItemsSource="{Binding Penetration}" Height="30"/>
             <TextBlock Text="Shell size"/>
-            <ComboBox Height="25"/>
+            <ComboBox SelectedItem="{Binding DataPoint.ShellSize}" ItemsSource="{Binding ShellSize}" Height="30"/>
             <TextBlock Text="Shell type"/>
-            <ComboBox x:Name="ShellTypes" Height="25"/>
-            <Button  Click="Add_Click" Content="Add" Height="25" Margin="10" Width="60"/>
+            <ComboBox SelectedItem="{Binding DataPoint.ShellType}" ItemsSource="{Binding ShellType}" Height="30"/>
+            <Button Click="Add_Click" Content="Add" Height="25" Margin="10" Width="60"/>
         </StackPanel>
         
     </Grid>

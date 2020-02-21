@@ -4,6 +4,7 @@ using Naive_bayes.Data_Access.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Text;
 
 namespace Naive_bayes.ViewModels
@@ -24,13 +25,16 @@ namespace Naive_bayes.ViewModels
 
         public MainWindowViewModel()
         {
-            Penetrations = new ObservableCollection<PenetrationDataPointDto>();
+            LoadPenetrations();
         }
 
         public async void LoadPenetrations()
         {
+            Penetrations = new ObservableCollection<PenetrationDataPointDto>();
+
             var penetrationDataPointRepository = new PenetrationDataPointRepository(new PenetrationDataContext());
-            foreach(var penetration in await penetrationDataPointRepository.GetAsync())
+            var databasePenetrations = await penetrationDataPointRepository.GetAsync();
+            foreach(var penetration in databasePenetrations)
             {
                 Penetrations.Add(penetration);
             }
