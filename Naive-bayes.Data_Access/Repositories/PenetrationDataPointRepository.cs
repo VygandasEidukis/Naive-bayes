@@ -25,6 +25,7 @@ namespace Naive_bayes.Data_Access.Repositories
                 .Include(b => b.penetration)
                 .Include(c => c.shellSize)
                 .Include(d => d.shellType);
+
             List<PenetrationDataPointDto> dataPointDtos = new List<PenetrationDataPointDto>();
             foreach (var point in dataPoints)
             {
@@ -44,7 +45,13 @@ namespace Naive_bayes.Data_Access.Repositories
                 armorId = penetrationDataPoint.Armor.Id,
                 penetrationId = penetrationDataPoint.Penetration.Id,
                 shellSizeId = penetrationDataPoint.ShellSize.Id,
-                shellTypeId = penetrationDataPoint.ShellType.Id
+                shellTypeId = penetrationDataPoint.ShellType.Id,
+                WillPen = penetrationDataPoint.WillPen,
+                angle = await Context.Angles.FirstOrDefaultAsync(a => a.Id == penetrationDataPoint.Angle.Id),
+                armor = await Context.Armors.FirstOrDefaultAsync(a => a.Id == penetrationDataPoint.Armor.Id),
+                penetration = await Context.Penetrations.FirstOrDefaultAsync(a => a.Id == penetrationDataPoint.Penetration.Id),
+                shellSize = await Context.ShellSizes.FirstOrDefaultAsync(a => a.Id == penetrationDataPoint.ShellSize.Id),
+                shellType = await Context.ShellTypes.FirstOrDefaultAsync(a => a.Id == penetrationDataPoint.ShellType.Id)
             };
             await Add(dataPoint).ConfigureAwait(true);
             await SaveChanges();

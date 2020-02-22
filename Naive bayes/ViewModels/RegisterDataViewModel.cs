@@ -81,12 +81,12 @@ namespace Naive_bayes.ViewModels
 			}
 		}
 
-
 		#endregion
 
 		public RegisterDataViewModel()
 		{
 			Load();
+			PrepareDataPoint();
 		}
 
 		public async void Load()
@@ -113,25 +113,27 @@ namespace Naive_bayes.ViewModels
 			var shellTypes = await new ShellTypeRepository(context).GetAsync();
 			foreach (var type in shellTypes)
 				ShellType.Add(type);
+		}
 
-			DataPoint = new PenetrationDataPointDto() 
-			{ 
-				Angle = this.Angle[0], 
-				Armor = this.Armor[0], 
-				ShellType = this.ShellType[0], 
-				ShellSize = this.ShellSize[0], 
-				Penetration = this.Penetration[0] 
+		private void PrepareDataPoint()
+		{
+			DataPoint = new PenetrationDataPointDto()
+			{
+				Angle = this.Angle[0],
+				Armor = this.Armor[0],
+				ShellType = this.ShellType[0],
+				ShellSize = this.ShellSize[0],
+				Penetration = this.Penetration[0]
 			};
 		}
 
-		public void ResetData()
+		private void ResetData()
 		{
 			Angle = new ObservableCollection<AngleDto>();
 			Armor = new ObservableCollection<ArmorDto>();
 			Penetration = new ObservableCollection<PenetrationDto>();
 			ShellSize = new ObservableCollection<ShellSizeDto>();
 			ShellType = new ObservableCollection<ShellTypeDto>();
-			DataPoint = new PenetrationDataPointDto();
 		}
 
 		public async void AddData_Clicked()

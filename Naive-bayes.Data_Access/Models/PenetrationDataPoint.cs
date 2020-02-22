@@ -48,10 +48,11 @@ namespace Naive_bayes.Data_Access.Models
             {
                 Id = this.Id,
                 Angle = new AngleDto() { Id = this.angle.Id, Angle = this.angle.angle },
-                Armor = new ArmorDto() { Id = this.armor.Id, Armor = this.armor.armor }, 
-                Penetration = new PenetrationDto() { Id = this.penetration.Id, Penetration = this.penetration.penetration }, 
-                ShellSize = new ShellSizeDto() {  Id = this.shellSize.Id, Size = this.shellSize.Size },
-                ShellType = new ShellTypeDto() { Id = this.shellType.Id, Type = this.shellType.Type }
+                Armor = new ArmorDto() { Id = this.armor.Id, Armor = this.armor.armor },
+                Penetration = new PenetrationDto() { Id = this.penetration.Id, Penetration = this.penetration.penetration },
+                ShellSize = new ShellSizeDto() { Id = this.shellSize.Id, Size = this.shellSize.Size },
+                ShellType = new ShellTypeDto() { Id = this.shellType.Id, Type = this.shellType.Type },
+                WillPen = this.WillPen
             };
             return dto;
         }

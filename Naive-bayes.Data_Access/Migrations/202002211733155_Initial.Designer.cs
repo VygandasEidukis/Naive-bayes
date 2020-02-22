@@ -13,7 +13,7 @@ namespace Naive_bayes.Data_Access.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202002211646207_Initial"; }
+            get { return "202002211733155_Initial"; }
         }
         
         string IMigrationMetadata.Source

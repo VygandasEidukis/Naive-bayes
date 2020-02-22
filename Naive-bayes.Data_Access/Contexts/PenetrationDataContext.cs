@@ -22,7 +22,7 @@ namespace Naive_bayes.Data_Access.Contexts
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //modelBuilder.Configurations.Add(new PenetrationDataPointConfiguration());
+            modelBuilder.Configurations.Add(new PenetrationDataPointConfiguration());
         }
     }
 }

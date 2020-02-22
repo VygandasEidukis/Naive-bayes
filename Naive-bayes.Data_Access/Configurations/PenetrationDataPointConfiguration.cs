@@ -10,11 +10,7 @@ namespace Naive_bayes.Data_Access.Configurations
     {
         internal PenetrationDataPointConfiguration()
         {
-            HasRequired(a => a.angle);
-            HasRequired(a => a.armor);
-            HasRequired(a => a.penetration);
-            HasRequired(a => a.shellSize);
-            HasRequired(a => a.shellType);
+            Property(x => x.WillPen).IsOptional();
         }
     }
 }
