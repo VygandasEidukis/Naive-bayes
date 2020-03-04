@@ -7,8 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindowView" Height="450" Width="800">
     <Grid>
-        <ListView ItemsSource="{Binding Penetrations}">
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="110"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <ListView Grid.Row="0" ItemsSource="{Binding Penetrations}">
+
         </ListView>
+        <ListBox Grid.Row="2" ItemsSource="{Binding PenetrationsNulled}" SelectionChanged="ListView_SelectionChanged">
+
+        </ListBox>
     </Grid>
 </Window>

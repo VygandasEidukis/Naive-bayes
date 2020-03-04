@@ -5,6 +5,7 @@ using Naive_bayes.Data_Access.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +16,14 @@ namespace Naive_bayes.Data_Access.Repositories
         public PenetrationDataPointRepository(PenetrationDataContext context) :base(context)
         {
 
+        }
+
+        public async Task UpdatePenetration(int id, bool willPen)
+        {
+            var dataPoint = Context.PenetrationDataPoints.Where(x => x.Id == id).FirstOrDefault();
+            dataPoint.WillPen = willPen;
+
+            await base.Update(dataPoint);
         }
 
         public async Task<IEnumerable<PenetrationDataPointDto>> GetAsync()

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Naive_bayes.Common.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,12 +30,18 @@ namespace Naive_bayes.Views
                 registerData.Closed += (a, b) => this.Close();
             });
             DataContext = new ViewModels.MainWindowViewModel();
+            registerData.addedDataPoint += (DataContext as ViewModels.MainWindowViewModel).LoadPenetrations;
         }
 
         protected override void OnClosed(EventArgs e)
         {
             registerData.Close();
             base.OnClosed(e);
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            (DataContext as ViewModels.MainWindowViewModel).ClassifyItem(((System.Windows.Controls.Primitives.Selector)sender).SelectedItem as PenetrationDataPointDto);
         }
     }
 }

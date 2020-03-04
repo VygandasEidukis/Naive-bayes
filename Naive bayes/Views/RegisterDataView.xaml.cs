@@ -18,13 +18,24 @@ namespace Naive_bayes.Views
     /// </summary>
     public partial class RegisterDataView : Window
     {
+        public delegate void AddedDataPoint();
+        public AddedDataPoint addedDataPoint;
+
         public RegisterDataView()
         {
-            InitializeComponent();
-
             DataContext = new RegisterDataViewModel();
+            InitializeComponent();
         }
 
+        public void added()
+        {
+            addedDataPoint?.Invoke();
+        }
         private void Add_Click(object sender, RoutedEventArgs e) => (DataContext as RegisterDataViewModel).AddData_Clicked();
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            (DataContext as RegisterDataViewModel).dataPointAdd += added;
+        }
     }
 }

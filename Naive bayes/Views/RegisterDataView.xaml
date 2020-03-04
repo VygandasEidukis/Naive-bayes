@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         WindowStyle="ToolWindow"
         ResizeMode="NoResize"
-        Title="RegisterDataView" Height="420" Width="200">
+        Title="RegisterDataView" Height="420" Width="200" Loaded="Window_Loaded">
     <Grid>
         <StackPanel Margin="5,0,5,0">
             <StackPanel.Resources>

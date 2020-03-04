@@ -8,6 +8,9 @@ namespace Naive_bayes.ViewModels
 {
 	public class RegisterDataViewModel : BaseViewModel
 	{
+		public delegate void AddDataPoint();
+		public AddDataPoint dataPointAdd;
+
 		private PenetrationDataPointDto _dataPoint;
 
 		public PenetrationDataPointDto DataPoint
@@ -142,6 +145,9 @@ namespace Naive_bayes.ViewModels
 			await repository.CreateNewDataPoint(DataPoint);
 			Load();
 			System.Windows.MessageBox.Show("Added data");
+
+			dataPointAdd?.Invoke();
+
 		}
 
 		

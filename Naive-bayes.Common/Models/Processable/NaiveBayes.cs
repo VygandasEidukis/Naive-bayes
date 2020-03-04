@@ -26,15 +26,23 @@ namespace Naive_bayes.Common.Models
         private static float _negativeShellType { get; set; }
         #endregion
 
-        public static bool CanPenetrate(List<PenetrationDataPointDto> data, PenetrationDataPointDto dataPoint)
+        public static bool CanPenetrate(ICollection<PenetrationDataPointDto> data, PenetrationDataPointDto dataPoint)
         {
             _dataPoint = dataPoint;
-            _data = data;
+
+            _data = new List<PenetrationDataPointDto>();
+            foreach(var d in data)
+            {
+                _data.Add(d);
+            }
 
             ExtractInitialData();
             GetPenetrationProbabilities();
 
-            return true;
+            float overallPositive = _positiveAngle * _positiveArmor * _positivePenetration * _positiveShellSize * _positiveShellType;
+            float overallNegative = _negativeAngle * _negativeArmor * _negativePenetration * _negativeShellSize * _negativeShellType;
+
+            return overallPositive > overallNegative;
         }
 
         private static void GetPenetrationProbabilities()
@@ -49,42 +57,70 @@ namespace Naive_bayes.Common.Models
         private static void GetShellTypeProbability()
         {
             var evaluationShellType = _data.Where(x => x.ShellType.Id == _dataPoint.ShellType.Id && x.WillPen != null);
-            _positiveShellType = evaluationShellType.Where(x => x.WillPen == true).Count() / _data.Where(x => x.WillPen == true).Count();
-            _negativeShellType = evaluationShellType.Where(x => x.WillPen == false).Count() / _data.Where(x => x.WillPen == false).Count();
+
+            float a = evaluationShellType.Where(x => x.WillPen == true).Count();
+            float b = _data.Where(x => x.WillPen == true).Count();
+            _positiveShellType = a / b;
+
+            a = evaluationShellType.Where(x => x.WillPen == false).Count();
+            b = _data.Where(x => x.WillPen == false).Count();
+            _negativeShellType = a / b;
         }
 
         private static void GetShellSizeProbability()
         {
             var evaluationShellSizes = _data.Where(x => x.ShellSize.Id == _dataPoint.ShellSize.Id && x.WillPen != null);
-            _positiveShellSize = evaluationShellSizes.Where(x => x.WillPen == true).Count() / _data.Where(x => x.WillPen == true).Count();
-            _negativeShellSize = evaluationShellSizes.Where(x => x.WillPen == false).Count() / _data.Where(x => x.WillPen == false).Count();
+            float a = _data.Where(x => x.WillPen == true).Count();
+            float b = evaluationShellSizes.Where(x => x.WillPen == true).Count();
+            _positiveShellSize = a / b;
+
+
+            a = evaluationShellSizes.Where(x => x.WillPen == false).Count();
+            b = _data.Where(x => x.WillPen == false).Count();
+            _negativeShellSize = a / b;
         }
 
         private static void GetPenetrationProbability()
         {
             var evaluatedPenetrations = _data.Where(x => x.Penetration.Id == _dataPoint.Penetration.Id && x.WillPen != null);
-            _positivePenetration = evaluatedPenetrations.Where(x => x.WillPen == true).Count() / _data.Where(x => x.WillPen == true).Count();
-            _negativePenetration = evaluatedPenetrations.Where(x => x.WillPen == false).Count() / _data.Where(x => x.WillPen == false).Count();
+
+            float a = evaluatedPenetrations.Where(x => x.WillPen == true).Count();
+            float b = _data.Where(x => x.WillPen == true).Count();
+            _positivePenetration = a / b;
+
+            a = evaluatedPenetrations.Where(x => x.WillPen == false).Count();
+            b = _data.Where(x => x.WillPen == false).Count();
+            _negativePenetration = a / b;
         }
 
         private static void GetArmorProbability()
         {
             var evaluatedArmors = _data.Where(x => x.Armor.Id == _dataPoint.Armor.Id && x.WillPen != null);
-            _positiveArmor = evaluatedArmors.Where(x => x.WillPen == true).Count() / _data.Where(x => x.WillPen == true).Count();
-            _negativeArmor = evaluatedArmors.Where(x => x.WillPen == false).Count() / _data.Where(x => x.WillPen == false).Count();
+            float a = evaluatedArmors.Where(x => x.WillPen == true).Count();
+            float b = _data.Where(x => x.WillPen == true).Count();
+            _positiveArmor = a / b;
+
+            a = evaluatedArmors.Where(x => x.WillPen == false).Count();
+            b = _data.Where(x => x.WillPen == false).Count();
+            _negativeArmor = a / b;
         }
 
         private static void GetAngleProbability()
         {
             var evaluatedAngles = _data.Where(x => x.Angle.Id == _dataPoint.Angle.Id && x.WillPen != null);
-            _positiveAngle = evaluatedAngles.Where(x => x.WillPen == true).Count() / _data.Where(x => x.WillPen == true).Count();
-            _negativeAngle = evaluatedAngles.Where(x => x.WillPen == false).Count() / _data.Where(x => x.WillPen == false).Count();
+            float a = evaluatedAngles.Where(x => x.WillPen == true).Count();
+            float b = _data.Where(x => x.WillPen == true).Count();
+            _positiveAngle = a / _data.Where(x => x.WillPen == true).Count();
+
+            a = evaluatedAngles.Where(x => x.WillPen == false).Count();
+            b = _data.Where(x => x.WillPen == false).Count();
+            _negativeAngle = a / b;
         }
 
         private static void ExtractInitialData()
         {
-            _positiveData = _data.FindAll(x => x.WillPen == true).Count;
-            _negativeData = _data.FindAll(x => x.WillPen == false).Count;
+            _positiveData = _data.Where(x => x.WillPen == true).Count();
+            _negativeData = _data.Where(x => x.WillPen == false).Count();
             _overallData = _positiveData + _negativeData;
         }
     }

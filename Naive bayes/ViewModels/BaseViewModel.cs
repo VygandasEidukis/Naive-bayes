@@ -10,7 +10,9 @@ namespace Naive_bayes.ViewModels
 
 		protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+			//PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+			if(PropertyChanged != null)
+				PropertyChanged(this, new PropertyChangedEventArgs(name));
 		}
 		#endregion
 	}
