@@ -20,7 +20,7 @@ namespace Naive_bayes.ViewModels
             set
             {
                 _penetrations = value;
-                OnPropertyChanged();
+                NotifyPropertyChanged("Penetrations");
             }
         }
 
@@ -32,7 +32,7 @@ namespace Naive_bayes.ViewModels
             set
             {
                 _penetrationsNulled = value;
-                OnPropertyChanged("PenetrationsNulled");
+                NotifyPropertyChanged("PenetrationsNulled");
             }
         }
 
@@ -57,14 +57,20 @@ namespace Naive_bayes.ViewModels
             {
                 PenetrationsNulled.Add(penetration);
             }
+            NotifyPropertyChanged("PenetrationsNulled");
+            NotifyPropertyChanged("Penetrations");
         }
 
-        public void ClassifyItem(PenetrationDataPointDto dto)
+        public async void ClassifyItem(PenetrationDataPointDto dto)
         {
-            var a = NaiveBayes.CanPenetrate(Penetrations, dto);
+            if (dto == null)
+                return;
+
+            var result = NaiveBayes.CanPenetrate(Penetrations, dto);
 
             PenetrationDataPointRepository penetrationDataPointRepository = new PenetrationDataPointRepository(new PenetrationDataContext());
-            
+            await penetrationDataPointRepository.UpdatePenetration(dto.Id, result);
+            LoadPenetrations();
         }
     }
 }

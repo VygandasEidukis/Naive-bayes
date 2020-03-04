@@ -19,7 +19,7 @@ namespace Naive_bayes.ViewModels
 			set 
 			{
 				_dataPoint = value;
-				OnPropertyChanged();
+				NotifyPropertyChanged("DataPoint");
 			}
 		}
 
@@ -32,7 +32,7 @@ namespace Naive_bayes.ViewModels
 			set 
 			{ 
 				_angle = value;
-				OnPropertyChanged();
+				NotifyPropertyChanged("Angle");
 			}
 		}
 
@@ -44,7 +44,7 @@ namespace Naive_bayes.ViewModels
 			set 
 			{ 
 				_armor = value;
-				OnPropertyChanged();
+				NotifyPropertyChanged("Armor");
 			}
 		}
 
@@ -56,7 +56,7 @@ namespace Naive_bayes.ViewModels
 			set 
 			{ 
 				_penetration = value;
-				OnPropertyChanged();
+				NotifyPropertyChanged("Penetration");
 			}
 		}
 
@@ -68,7 +68,7 @@ namespace Naive_bayes.ViewModels
 			set 
 			{ 
 				_shellSize = value;
-				OnPropertyChanged();
+				NotifyPropertyChanged("ShellSize");
 			}
 		}
 
@@ -80,7 +80,7 @@ namespace Naive_bayes.ViewModels
 			set 
 			{ 
 				_shellType = value;
-				OnPropertyChanged();
+				NotifyPropertyChanged("ShellType");
 			}
 		}
 
@@ -128,6 +128,7 @@ namespace Naive_bayes.ViewModels
 				ShellSize = this.ShellSize[0],
 				Penetration = this.Penetration[0]
 			};
+			NotifyPropertyChanged("DataPoint");
 		}
 
 		private void ResetData()
@@ -142,11 +143,18 @@ namespace Naive_bayes.ViewModels
 		public async void AddData_Clicked()
 		{
 			var repository = new PenetrationDataPointRepository(new PenetrationDataContext());
-			await repository.CreateNewDataPoint(DataPoint);
-			Load();
-			System.Windows.MessageBox.Show("Added data");
+			try
+			{
+				await repository.CreateNewDataPoint(DataPoint); Load();
+				System.Windows.MessageBox.Show("Added data");
 
-			dataPointAdd?.Invoke();
+				dataPointAdd?.Invoke();
+			}
+			catch
+			{
+				System.Windows.MessageBox.Show("Are all data points selected?");
+			}
+			
 
 		}
 

@@ -13,10 +13,10 @@
             <RowDefinition Height="110"></RowDefinition>
         </Grid.RowDefinitions>
         
-        <ListView Grid.Row="0" ItemsSource="{Binding Penetrations}">
+        <ListView Grid.Row="0" ItemsSource="{Binding Penetrations, Mode=TwoWay}">
 
         </ListView>
-        <ListBox Grid.Row="2" ItemsSource="{Binding PenetrationsNulled}" SelectionChanged="ListView_SelectionChanged">
+        <ListBox Grid.Row="2" ItemsSource="{Binding PenetrationsNulled, Mode=TwoWay}" SelectionChanged="ListView_SelectionChanged">
 
         </ListBox>
     </Grid>
