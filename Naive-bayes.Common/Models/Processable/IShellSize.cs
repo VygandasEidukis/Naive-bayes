@@ -4,14 +4,9 @@ using System.Text;
 
 namespace Naive_bayes.Common.Models
 {
-    public class ShellSizeDto : IShellSize
+    public interface IShellSize
     {
         public int Id { get; set; }
         public string Size { get; set; }
-
-        public override string ToString()
-        {
-            return Size;
-        }
     }
 }

@@ -1,15 +1,15 @@
 ﻿namespace Naive_bayes.Common.Models
 {
-    public class PenetrationDataPointDto
+    public class PenetrationDataPointDto : IPenetrationDataPoint
     {
         public int Id { get; set; }
         public bool? WillPen { get; set; }
 
-        public virtual ArmorDto Armor { get; set; }
-        public virtual AngleDto Angle { get; set; }
-        public virtual PenetrationDto Penetration { get; set; }
-        public virtual ShellSizeDto ShellSize { get; set; }
-        public virtual ShellTypeDto ShellType { get; set; }
+        public ArmorDto Armor { get; set; }
+        public AngleDto Angle { get; set; }
+        public PenetrationDto Penetration { get; set; }
+        public ShellSizeDto ShellSize { get; set; }
+        public ShellTypeDto ShellType { get; set; }
 
         public override string ToString()
         {
